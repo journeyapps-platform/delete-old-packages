@@ -32,9 +32,9 @@ const run = async () => {
   });
 
   const list_packages = `
-    query($node_id: ID!) {
-      organization(login: "journeyapps-platform") {
-        packages(first: 100, packageType: NPM, repositoryId: $node_id) {
+    query($repo_id: ID!, $owner: String!) {
+      organization(login: $owner) {
+        packages(first: 100, packageType: NPM, repositoryId: $repo_id) {
           nodes {
             name
           }
@@ -44,6 +44,7 @@ const run = async () => {
   `;
 
   const res = (await client.graphql(list_packages, {
+    owner: owner,
     repo_id: repo_metadata.data.node_id
   })) as { organization: { packages: { nodes: { name: string }[] } } };
 
