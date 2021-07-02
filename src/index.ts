@@ -12,7 +12,7 @@ const listPackageVersions = async (client: any, params: ListPackageVersionParams
       organization(login: $owner) {
         packages(first: 1, names: [$package_name], packageType: NPM, repositoryId: $repo_id) {
           nodes {
-            versions(first: 100, after: $cursor, orderBy: { field: CREATED_AT, direction: ASC }) {
+            versions(first: 100, after: $cursor, orderBy: { field: CREATED_AT, direction: DESC }) {
               pageInfo {
                 endCursor
                 hasNextPage
@@ -84,7 +84,7 @@ const run = async () => {
   const version_pattern_raw = core.getInput('version-pattern', {
     required: true
   });
-  const keep = parseInt(core.getInput('keep') || '20');
+  const keep = parseInt(core.getInput('keep') || '50');
 
   const package_pattern = new RegExp(package_pattern_raw);
   const version_pattern = new RegExp(version_pattern_raw);
@@ -149,6 +149,9 @@ const run = async () => {
 
     if (dry_run) {
       core.info(`would delete in '${package_name}' the versions: ${versions.map((version) => version.version)}`);
+      core.info(
+        `which is ${versions.length} versions of ${filtered_versions.length} matching (${all_versions.length}) total package versions`
+      );
       continue;
     }
 
