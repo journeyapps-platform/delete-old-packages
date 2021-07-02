@@ -140,7 +140,6 @@ const run = async () => {
       repo_id: repo_metadata.data.node_id,
       package_name: package_name
     });
-    console.log(all_versions);
 
     const filtered_versions = all_versions.filter((version) => {
       return version_pattern.test(version.version);
@@ -155,7 +154,7 @@ const run = async () => {
 
     for (const version of versions) {
       core.info(`deleting version ${package_name}@${version.version}`);
-      client.graphql(delete_package, {
+      await client.graphql(delete_package, {
         package_version: version.id,
         headers: {
           Accept: 'application/vnd.github.package-deletes-preview+json'
