@@ -55,7 +55,7 @@ const run = async () => {
     .map((pkg) => pkg.name);
 
   for (const package_name of packages) {
-    const all_versions = await client.paginate(client.packages.getAllPackageVersionsForAPackageOwnedByAnOrg, {
+    const all_versions = await client.paginate(client.packages.getAllPackageVersionsForPackageOwnedByOrg, {
       state: 'active',
       package_type: 'npm',
       package_name: package_name,
