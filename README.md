@@ -6,13 +6,13 @@ Github action for deleting old versions of packages in the Github package regist
 
 | Name              | Description                                                | Required           | Default       |
 | ----------------- | ---------------------------------------------------------- | ------------------ | ------------- |
-| `owner`           | Owner of the repo containing the package(s)                | :x:                | Set by Github |
-| `repo`            | Repo containing the package(s)                             | :x:                | Set by Github |
-| `package-pattern` | Regex pattern of the packages                              | :x:                | :x:           |
-| `version-pattern` | Regex pattern of the versions                              | :x:                | :x:           |
-| `keep`            | Number of versions to exclude from deletions               | :x:                | 50            |
-| `github-token`    | Token with the necessary scopes to delete package versions | :x:                | Set by Github |
-| `dry-run`         | If the action should only print what it would do.          | :x:                | `false`       |
+| `owner`           | Owner of the repo containing the package(s)                | no                 | Set by Github |
+| `repo`            | Repo containing the package(s)                             | no                 | Set by Github |
+| `package-pattern` | Regex pattern of the packages                              | yes                | N\A           |
+| `version-pattern` | Regex pattern of the versions                              | yes                | N\A           |
+| `keep`            | Number of versions to exclude from deletions               | no                 | 50            |
+| `github-token`    | Token with the necessary scopes to delete package versions | no                 | Set by Github |
+| `dry-run`         | If the action should only print what it would do.          | no                 | `false`       |
 
 ### Example usage
 
