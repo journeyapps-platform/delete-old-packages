@@ -155,7 +155,7 @@ const run = async () => {
     for (const version of versions) {
       core.info(`deleting version ${package_name}@${version.version}`);
       await client.graphql(delete_package, {
-        package_version: version.id,
+        package_id: version.id,
         headers: {
           Accept: 'application/vnd.github.package-deletes-preview+json'
         }
