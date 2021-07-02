@@ -148,10 +148,13 @@ const run = async () => {
     const versions = filtered_versions.slice(keep);
 
     if (dry_run) {
-      core.info(`would delete in '${package_name}' the versions: ${versions.map((version) => version.version)}`);
+      core.info('===');
+      core.info(`would delete in '${package_name}' the versions:\n`);
+      core.info(`${versions.map(({ version }) => version)}\n`);
       core.info(
         `which is ${versions.length} versions out of the ${filtered_versions.length} matching the filter. There are ${all_versions.length} total versions in this package\n`
       );
+      core.info('===\n');
       continue;
     }
 
