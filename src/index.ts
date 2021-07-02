@@ -150,7 +150,7 @@ const run = async () => {
     if (dry_run) {
       core.info(`would delete in '${package_name}' the versions: ${versions.map((version) => version.version)}`);
       core.info(
-        `which is ${versions.length} versions of ${filtered_versions.length} matching (${all_versions.length}) total package versions`
+        `which is ${versions.length} versions out of the ${filtered_versions.length} matching the filter. There are ${all_versions.length} total versions in this package\n`
       );
       continue;
     }
