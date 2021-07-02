@@ -30,7 +30,7 @@ inputs:
       Defaults to 10.
     required: false
 
-  token:
+  github-token:
     description: >-
       Token with the necessary scopes to delete and list package versions.
       Defaults to github.token scoped to the repo running the action. To delete package versions
