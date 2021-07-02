@@ -19,7 +19,7 @@ Github action for deleting old versions of packages in the Github package regist
 > Delete old versions of the packages "package-1" and "package-2" for the current repository.
 
 ```yaml
-uses: journeyapps-platform/delete-old-packages@v1.0.0
+uses: journeyapps-platform/delete-old-packages@v1.0.1
 with:
   package-pattern: "package-(1|2)"
   version-pattern: ".*"
