@@ -27,7 +27,7 @@ inputs:
   keep:
     description: >-
       Number of versions to exclude from deletions.
-      Defaults to 10.
+      Defaults to 20.
     required: false
 
   github-token:
