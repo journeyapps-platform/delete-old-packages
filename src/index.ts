@@ -115,7 +115,7 @@ const run = async () => {
 
   const delete_package = `
     mutation deletePackageVersion($package_id: ID!) {
-      deletePackageVersion(input: { packageVersionId: $package_id }) {
+      deletePackageVersion(input: { packageVersionId: "$package_id" }) {
         success
       }
     }
