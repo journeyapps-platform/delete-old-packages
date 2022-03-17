@@ -1,11 +1,18 @@
 import * as github from '@actions/github';
 import * as core from '@actions/core';
+import fetch from 'node-fetch';
 
 type ListPackageVersionParams = {
   owner: string;
   repo_id: string;
   package_name: string;
 };
+
+type Version = {
+  id: string;
+  version: string;
+};
+
 const listPackageVersions = async (client: any, params: ListPackageVersionParams) => {
   const list_package_versions = `
     query ($owner: String!, $repo_id: ID!, $package_name: String!, $cursor: String) {
@@ -28,10 +35,6 @@ const listPackageVersions = async (client: any, params: ListPackageVersionParams
     }
   `;
 
-  type Version = {
-    id: string;
-    version: string;
-  };
   type PackageVersionsGraphResponse = {
     organization: {
       packages: {
@@ -113,13 +116,25 @@ const run = async () => {
     }
   `;
 
-  const delete_package = `
-    mutation deletePackageVersion($package_id: ID!) {
-      deletePackageVersion(input: { packageVersionId: $package_id }) {
-        success
-      }
+  // The graphQL query failed on types, thus we are POSTing to the endpoint instead
+  const deleteVersion = async (version: Version) => {
+    try {
+      const res = await fetch('https://api.github.com/graphql', {
+        method: 'post',
+        body: JSON.stringify({
+          query: `mutation { deletePackageVersion(input:{packageVersionId:\"${version.id}\"}) { success }}`
+        }),
+        headers: {
+          Accept: 'application/vnd.github.package-deletes-preview+json',
+          Authorization: `bearer ${process.env.GITHUB_TOKEN}`
+        }
+      });
+      const resJson = await res.json();
+      core.debug(JSON.stringify(resJson));
+    } catch (error) {
+      core.setFailed(`failed to delete ${JSON.stringify(version)}: ${JSON.stringify(error.message)}`);
     }
-  `;
+  };
 
   const res = (await client.graphql(list_packages, {
     owner: owner,
@@ -160,12 +175,7 @@ const run = async () => {
 
     for (const version of versions) {
       core.info(`deleting version ${package_name}@${version.version}`);
-      await client.graphql(delete_package, {
-        package_id: version.id,
-        headers: {
-          Accept: 'application/vnd.github.package-deletes-preview+json'
-        }
-      });
+      await deleteVersion(version);
     }
 
     core.info(`deleted ${versions.length} versions`);

@@ -1,6 +1,6 @@
 {
   "name": "delete-old-packages",
-  "version": "0.0.1",
+  "version": "1.0.3",
   "description": "Github Action for deleting old packages",
   "main": "dist/index.js",
   "author": "journeyapps-platform",
@@ -13,11 +13,13 @@
   },
   "dependencies": {
     "@actions/core": "^1.2.6",
-    "@actions/github": "^4.0.0"
+    "@actions/github": "^4.0.0",
+    "node-fetch": "^2.6.1"
   },
   "devDependencies": {
     "@journeyapps-platform/formatter-cli": "^2.17.1",
     "@types/node": "^15.14.0",
+    "@types/node-fetch": "^2.6.1",
     "@vercel/ncc": "^0.28.2",
     "prettier": "^2.1.2",
     "typescript": "^4.3.5"
