@@ -1,6 +1,6 @@
 {
   "name": "delete-old-packages",
-  "version": "0.0.1",
+  "version": "1.0.3",
   "description": "Github Action for deleting old packages",
   "main": "dist/index.js",
   "author": "journeyapps-platform",
