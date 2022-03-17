@@ -116,14 +116,7 @@ const run = async () => {
     }
   `;
 
-  const delete_package = `
-    mutation deletePackageVersion($package_id: ID!) {
-      deletePackageVersion(input: { packageVersionId: "$package_id" }) {
-        success
-      }
-    }
-  `;
-
+  // The graphQL query failed on types, thus we are POSTing to the endpoint instead
   const deleteVersion = async (version: Version) => {
     try {
       const res = await fetch('https://api.github.com/graphql', {
@@ -182,13 +175,6 @@ const run = async () => {
 
     for (const version of versions) {
       core.info(`deleting version ${package_name}@${version.version}`);
-      // await client.graphql(delete_package, {
-      //   package_id: version.id,
-      //   headers: {
-      //     Accept: 'application/vnd.github.package-deletes-preview+json'
-      //   }
-      // });
-
       await deleteVersion(version);
     }
 
