@@ -18,6 +18,7 @@ jobs:
           cache: 'pnpm'
 
       - run: pnpm install
+      - run: pnpm test
 
       - if: github.ref == 'refs/heads/master'
         run: pnpm build

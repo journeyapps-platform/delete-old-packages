@@ -12,7 +12,7 @@
   "private": true,
   "scripts": {
     "start": "ts-node src/index.ts",
-    "build": "ncc build -m src/index.ts",
+    "build": "ncc build -m src/index.ts --target es2015",
     "clean": "rm -rf dist",
     "format": "journey-formatter format",
     "prepare": "journey-formatter install",
