@@ -37,23 +37,23 @@ generated [here](https://github.com/settings/tokens) and need to be added as a s
 
 ### Example usage
 
-> Delete old versions of the packages "package-1" and "package-2" for the organization "my-organization".
+> Delete old versions of the packages "package-1" and "package-2" for the organization "journeyapps-platform".
 
 ```yaml
-uses: journeyapps-platform/delete-old-packages@v1.2.0
+uses: journeyapps-platform/delete-old-packages@v1.1.0
 with:
   type: npm
-  organization: my-organization
+  organization: journeyapps-platform
   package-pattern: "package-(1|2)"
 ```
 
 > Delete old versions in the form of "1.0.0-RC1" of the package "package".
 
 ```yaml
-uses: journeyapps-platform/delete-old-packages@v1.2.0
+uses: journeyapps-platform/delete-old-packages@v1.1.0
 with:
   type: npm
-  organization: my-organization
+  organization: journeyapps-platform
   version-pattern: "^\\d+\\.\\d+\\.\\d+-RC\\d+$" # The regex needs to be escaped!
   package-pattern: "package"
 ```
@@ -61,10 +61,10 @@ with:
 > Delete old versions with a lower semver version than 2.x of the package "package".
 
 ```yaml
-uses: journeyapps-platform/delete-old-packages@v1.2.0
+uses: journeyapps-platform/delete-old-packages@v1.1.0
 with:
   type: npm
-  organization: my-organization
+  organization: journeyapps-platform
   semver-pattern: "<2.x"
   package-pattern: "package"
 ```
@@ -72,10 +72,10 @@ with:
 > Delete old versions of the package "package" but keep at least 5 versions.
 
 ```yaml
-uses: journeyapps-platform/delete-old-packages@v1.2.0
+uses: journeyapps-platform/delete-old-packages@v1.1.0
 with:
   type: npm
-  organization: my-organization
+  organization: journeyapps-platform
   keep: 5
   package-pattern: "package"
 ```
@@ -83,11 +83,11 @@ with:
 > Delete old versions of the package "package" with a token named "GH_ACCESS_TOKEN".
 
 ```yaml
-uses: journeyapps-platform/delete-old-packages@v1.2.0
+uses: journeyapps-platform/delete-old-packages@v1.1.0
 with:
   type: npm
   token: ${{ secrets.GH_ACCESS_TOKEN }}
-  organization: my-organization
+  organization: journeyapps-platform
   package-pattern: "package"
 ```
 
@@ -99,10 +99,10 @@ In these cases, the rate limit `retry after` returned from the GitHub api during
 retrying, up to five times. If the rate limit is exceeded more than five times, the action will fail.
 
 ```yaml
-uses: journeyapps-platform/delete-old-packages@v1.2.0
+uses: journeyapps-platform/delete-old-packages@v1.1.0
 with:
   type: npm
-  organization: my-organization
+  organization: journeyapps-platform
   rate-limit: true
   keep: 5
   package-pattern: "package"
