@@ -2,16 +2,14 @@ name: Delete old packages
 description: Deletes old package versions
 
 inputs:
-  owner:
+  user:
     description: >-
-      Owner of the repo containing the package(s).
-      Defaults to the owner of the repo running the action.
+      User hosting the package(s).
     required: false
 
-  repo:
+  organization:
     description: >-
-      Repo containing the package(s).
-      Defaults to the repo running the action.
+      Organization hosting the package(s).
     required: false
 
   package-pattern:
@@ -19,9 +17,15 @@ inputs:
       Regex pattern for packages to find old versions within
     required: true
 
+  semver-pattern:
+    description: >-
+      Semver range pattern of the versions.
+    required: false
+
   version-pattern:
     description: >-
-      Regex pattern for package versions to delete
+      Regex pattern of the versions.
+      Defaults to true for all versions.
     required: false
 
   keep:
@@ -30,7 +34,12 @@ inputs:
       Defaults to 50.
     required: false
 
-  github-token:
+  type:
+    description: >-
+      The type of the packages, e.g. "npm" or "container".
+    required: false
+
+  token:
     description: >-
       Token with the necessary scopes to delete and list package versions.
       Defaults to github.token scoped to the repo running the action. To delete package versions
@@ -44,6 +53,12 @@ inputs:
     required: false
     default: "false"
 
+  rate-limit:
+    description: >-
+      Enables the rate limit plugin to handle rate limits against the rest api.
+    required: false
+    default: "false"
+
 runs:
-  using: node12
+  using: node16
   main: dist/index.js
