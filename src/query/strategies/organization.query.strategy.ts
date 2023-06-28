@@ -15,18 +15,21 @@ export default class OrganizationQueryStrategy implements QueryStrategy {
       package_type: input.type
     });
 
-    //filter out packages that does not match input.packagePattern
-    const filteredPackages = allPackages.data.filter((pkg) => {
-      return input.packagePattern!.test(pkg.name);
-    });
+    try {
+      const filteredPackages = allPackages.data.filter((pkg) => {
+        return input.packagePattern?.test(pkg.name) && pkg.repository?.name === input.repo;
+      });
 
-    return await Promise.all(
-      filteredPackages.map(async ({ name }) => {
-        const response = await this.queryPackage(input, name);
+      return await Promise.all(
+        filteredPackages.map(async ({ name }) => {
+          const response = await this.queryPackage(input, name);
 
-        return processResponse(name, response);
-      })
-    );
+          return processResponse(name, response);
+        })
+      );
+    } catch (error) {
+      throw new Error(`Failed to list all packages packages: ${error}`);
+    }
   }
 
   private async queryPackage(input: RestInput, name: string) {

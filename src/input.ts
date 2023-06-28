@@ -1,4 +1,5 @@
-import { getBooleanInput, getInput, getMultilineInput } from '@actions/core';
+import { getBooleanInput, getInput } from '@actions/core';
+import * as github from '@actions/github';
 import { Range } from 'semver';
 import { Input, PackageType } from './types';
 
@@ -57,6 +58,7 @@ export function getActionInput(): Input {
     token: getInput('token'),
     dryRun: getBooleanInput('dry-run'),
     user: getInput('user'),
+    repo: getInput('repo') || github.context.repo.repo,
     organization: getInput('organization'),
     rateLimit: getBooleanInput('rate-limit')
   };
