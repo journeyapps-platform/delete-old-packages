@@ -37,7 +37,8 @@ inputs:
   type:
     description: >-
       The type of the packages, e.g. "npm" or "container".
-    required: false
+    required: true
+    default: "npm"
 
   token:
     description: >-

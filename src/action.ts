@@ -44,7 +44,7 @@ export async function executeAction(input: Input, queryStrategy: QueryStrategy, 
           info(`Deleting version ${version.names.join(', ')} of package ${name}`);
 
           if (!input.dryRun) {
-            await deleteStrategy.deletePackageVersion(input, name, version.id);
+            await deleteStrategy.deletePackageVersion(input, name, version);
           }
         })
     );
