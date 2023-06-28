@@ -42,5 +42,5 @@ export interface QueryStrategy {
 }
 
 export interface DeleteStrategy {
-  deletePackageVersion(input: Input, name: string, id: string): Promise<void>;
+  deletePackageVersion(input: Input, name: string, version: PackageVersion): Promise<void>;
 }
