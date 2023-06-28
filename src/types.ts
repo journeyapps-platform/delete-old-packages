@@ -19,7 +19,7 @@ export type Input = {
   dryRun: boolean;
   user: string;
   organization: string;
-  repo: string;
+  repo?: string;
   rateLimit?: boolean;
 };
 
